@@ -1,5 +1,6 @@
 package adeo.leroymerlin.cdp;
 
+import adeo.leroymerlin.cdp.listing.infra.adapter.hsql.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

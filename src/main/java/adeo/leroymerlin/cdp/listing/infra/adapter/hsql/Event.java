@@ -1,4 +1,4 @@
-package adeo.leroymerlin.cdp;
+package adeo.leroymerlin.cdp.listing.infra.adapter.hsql;
 
 import javax.persistence.*;
 import java.util.Set;

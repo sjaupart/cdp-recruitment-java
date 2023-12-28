@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Profile;
 public class ListingConfiguration {
 
     @Bean
-    public EventRepository eventsRepository(adeo.leroymerlin.cdp.EventRepository eventRepository) {
+    public EventRepository eventsRepository(adeo.leroymerlin.cdp.listing.infra.adapter.hsql.EventRepository eventRepository) {
         return new InMemoryEventRepository(eventRepository);
     }
 

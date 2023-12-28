@@ -1,4 +1,4 @@
-package adeo.leroymerlin.cdp;
+package adeo.leroymerlin.cdp.listing.infra.adapter.hsql;
 
 import org.springframework.data.repository.Repository;
 import org.springframework.transaction.annotation.Transactional;

@@ -9,9 +9,9 @@ import static java.util.stream.Collectors.toSet;
 
 public class InMemoryEventRepository implements EventRepository {
 
-    private final adeo.leroymerlin.cdp.EventRepository repository;
+    private final adeo.leroymerlin.cdp.listing.infra.adapter.hsql.EventRepository repository;
 
-    public InMemoryEventRepository(adeo.leroymerlin.cdp.EventRepository repository) {
+    public InMemoryEventRepository(adeo.leroymerlin.cdp.listing.infra.adapter.hsql.EventRepository repository) {
         this.repository = repository;
     }
 
@@ -22,7 +22,7 @@ public class InMemoryEventRepository implements EventRepository {
                 .collect(toSet());
     }
 
-    private Event toDomain(adeo.leroymerlin.cdp.Event persistedEvent) {
+    private Event toDomain(adeo.leroymerlin.cdp.listing.infra.adapter.hsql.Event persistedEvent) {
         Set<Band> bands = persistedEvent.getBands().stream()
                 .map(persistedBand -> new Band(
                         new BandId(persistedEvent.getId()),
