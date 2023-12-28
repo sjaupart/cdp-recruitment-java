@@ -6,11 +6,12 @@ import java.util.Set;
 public record Band(BandId id, String name, Set<Member> members) {
 
     public boolean hasMemberNameMatching(String pattern) {
-        if (Optional.ofNullable(pattern).isEmpty()) {
-            return false;
-        }
+        return Optional.ofNullable(pattern).stream()
+                .anyMatch(this::memberNameMatching);
+    }
 
+    private boolean memberNameMatching(String value) {
         return members.stream()
-                .anyMatch(member -> member.name().contains(pattern));
+                .anyMatch(member -> member.name().contains(value));
     }
 }

@@ -11,5 +11,6 @@ class BandTest {
     void band_has_member_name_matching_criteria() {
         assertThat(BAND_ACDC.hasMemberNameMatching("cob")).isTrue();
         assertThat(BAND_ACDC.hasMemberNameMatching("azerty")).isFalse();
+        assertThat(BAND_ACDC.hasMemberNameMatching(null)).isFalse();
     }
 }

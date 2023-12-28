@@ -5,11 +5,15 @@ import adeo.leroymerlin.cdp.listing.domain.port.out.EventRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Set;
+import java.util.stream.Stream;
 
 import static adeo.leroymerlin.cdp.listing.fixtures.EventFixtures.EVENT_DOWNLOAD_FESTIVAL;
 import static adeo.leroymerlin.cdp.listing.fixtures.EventFixtures.EVENT_VIEILLES_CHARRUES;
@@ -60,21 +64,23 @@ class ListEventsUseCaseTest {
         assertThat(listedEvents.events()).containsExactly(expectedResult);
     }
 
-    @Test
-    void list_events_matching_criteria() {
+    private static Stream<Arguments> eventsMatchingPattern() {
+        return Stream.of(
+                Arguments.of("o", Set.of("Les Vieilles Charrues", "Download Festival")),
+                Arguments.of("yn", Set.of("Les Vieilles Charrues")),
+                Arguments.of("Coo", Set.of("Download Festival")),
+                Arguments.of("coo", Set.of())
+        );
+    }
+
+    @MethodSource("eventsMatchingPattern")
+    @ParameterizedTest
+    void list_events_matching_criteria(String pattern, Set<String> eventNames) {
         when(eventRepository.events())
                 .thenReturn(Set.of(EVENT_VIEILLES_CHARRUES, EVENT_DOWNLOAD_FESTIVAL));
 
-        ListEventsUseCase.ListedEvents listedEvents = useCase.proceed(new ListEvents(SearchCriteria.of("o")));
-        assertThat(listedEvents.names()).containsExactlyInAnyOrder("Les Vieilles Charrues", "Download Festival");
+        ListEventsUseCase.ListedEvents listedEvents = useCase.proceed(new ListEvents(SearchCriteria.of(pattern)));
 
-        ListEventsUseCase.ListedEvents listedEventsWithYn = useCase.proceed(new ListEvents(SearchCriteria.of("yn")));
-        assertThat(listedEventsWithYn.names()).containsExactlyInAnyOrder("Les Vieilles Charrues");
-
-        ListEventsUseCase.ListedEvents listedEventsWithCoo = useCase.proceed(new ListEvents(SearchCriteria.of("Coo")));
-        assertThat(listedEventsWithCoo.names()).containsExactlyInAnyOrder("Download Festival");
-
-        ListEventsUseCase.ListedEvents listedEventsWithLowercasedCoo = useCase.proceed(new ListEvents(SearchCriteria.of("coo")));
-        assertThat(listedEventsWithLowercasedCoo.names()).containsExactlyInAnyOrder();
+        assertThat(listedEvents.names()).containsExactlyInAnyOrderElementsOf(eventNames);
     }
 }
