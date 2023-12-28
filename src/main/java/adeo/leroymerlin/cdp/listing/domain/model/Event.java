@@ -26,6 +26,26 @@ public class Event {
         return new Builder();
     }
 
+    public EventId id() {
+        return id;
+    }
+
+    public String name() {
+        return name;
+    }
+
+    public String pictureUrl() {
+        return pictureUrl;
+    }
+
+    public Integer numberOfStars() {
+        return numberOfStars;
+    }
+
+    public String comment() {
+        return comment;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -37,6 +57,17 @@ public class Event {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, pictureUrl, numberOfStars, comment);
+    }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", pictureUrl='" + pictureUrl + '\'' +
+                ", numberOfStars=" + numberOfStars +
+                ", comment='" + comment + '\'' +
+                '}';
     }
 
     public static class Builder {

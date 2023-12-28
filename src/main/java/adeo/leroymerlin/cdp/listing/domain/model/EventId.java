@@ -2,13 +2,13 @@ package adeo.leroymerlin.cdp.listing.domain.model;
 
 import java.util.Optional;
 
-public record EventId(Long id) {
+public record EventId(Long value) {
 
-    public EventId(Long id) {
-        if (Optional.ofNullable(id).isEmpty()) {
+    public EventId(Long value) {
+        if (Optional.ofNullable(value).isEmpty()) {
             throw new InvalidEvent("Event identifier is mandatory");
         }
 
-        this.id = id;
+        this.value = value;
     }
 }
