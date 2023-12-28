@@ -1,5 +1,6 @@
 package adeo.leroymerlin.cdp.listing.infra.resource;
 
+import adeo.leroymerlin.cdp.listing.domain.model.Band;
 import adeo.leroymerlin.cdp.listing.domain.model.Event;
 import adeo.leroymerlin.cdp.listing.domain.model.Member;
 import adeo.leroymerlin.cdp.listing.domain.use_cases.list_events.ListEvents;
@@ -52,12 +53,7 @@ public class ListEventsResource {
 
         public static ListedEventDto from(Event event) {
             Set<BandDto> bands = event.bands().stream()
-                    .map(band -> new BandDto(
-                                    band.id().value(),
-                                    band.name(),
-                                    from(band.members())
-                            )
-                    )
+                    .map(BandDto::fromDomain)
                     .collect(toSet());
 
             return new ListedEventDto(
@@ -69,22 +65,26 @@ public class ListEventsResource {
                     bands
             );
         }
-
-        private static Set<MemberDto> from(Set<Member> members) {
-            return members.stream()
-                    .map(member -> new MemberDto(
-                            member.id().value(),
-                            member.name()
-                    ))
-                    .collect(toSet());
-        }
     }
 
     public record BandDto(Long id, String name, Set<MemberDto> members) {
-
+        public static BandDto fromDomain(Band band) {
+            return new BandDto(
+                    band.id().value(),
+                    band.name(),
+                    band.members().stream()
+                            .map(MemberDto::fromDomain)
+                            .collect(toSet())
+            );
+        }
     }
 
     public record MemberDto(Long id, String name) {
-
+        public static MemberDto fromDomain(Member member) {
+            return new MemberDto(
+                    member.id().value(),
+                    member.name()
+            );
+        }
     }
 }
