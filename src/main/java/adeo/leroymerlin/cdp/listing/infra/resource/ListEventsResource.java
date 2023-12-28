@@ -1,7 +1,5 @@
 package adeo.leroymerlin.cdp.listing.infra.resource;
 
-import adeo.leroymerlin.cdp.listing.domain.model.Band;
-import adeo.leroymerlin.cdp.listing.domain.model.Event;
 import adeo.leroymerlin.cdp.listing.domain.model.Member;
 import adeo.leroymerlin.cdp.listing.domain.model.SearchCriteria;
 import adeo.leroymerlin.cdp.listing.domain.use_cases.list_events.ListEvents;
@@ -62,7 +60,7 @@ public class ListEventsResource {
             this.bands = bands;
         }
 
-        public static ListedEventDto from(Event event) {
+        public static ListedEventDto from(ListEventsUseCase.ListedEvent event) {
             Set<BandDto> bands = event.bands().stream()
                     .map(BandDto::fromDomain)
                     .collect(toSet());
@@ -79,7 +77,7 @@ public class ListEventsResource {
     }
 
     public record BandDto(Long id, String name, Set<MemberDto> members) {
-        public static BandDto fromDomain(Band band) {
+        public static BandDto fromDomain(ListEventsUseCase.ListedBand band) {
             return new BandDto(
                     band.id().value(),
                     band.name(),

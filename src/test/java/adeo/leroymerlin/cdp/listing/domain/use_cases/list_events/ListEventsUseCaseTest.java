@@ -41,14 +41,14 @@ class ListEventsUseCaseTest {
 
         ListEventsUseCase.ListedEvents listedEvents = useCase.proceed(ListEvents.noCriteria());
 
-        Event expectedResult = Event.builder()
-                .id(new EventId(1L))
-                .name("Les Vieilles Charrues")
-                .pictureUrl("vieilles_charrues.png")
-                .numberOfStars(5)
-                .comment("good event")
-                .bands(Set.of(
-                        new Band(
+        ListEventsUseCase.ListedEvent expectedResult = new ListEventsUseCase.ListedEvent(
+                new EventId(1L),
+                "Les Vieilles Charrues",
+                "vieilles_charrues.png",
+                5,
+                "good event",
+                Set.of(
+                        new ListEventsUseCase.ListedBand(
                                 new BandId(1006L),
                                 "AC/DC",
                                 Set.of(
@@ -58,8 +58,8 @@ class ListEventsUseCaseTest {
                                         new Member(new MemberId(1023L), "Queen Felix Nichols")
                                 )
                         )
-                ))
-                .build();
+                )
+        );
 
         assertThat(listedEvents.events()).containsExactly(expectedResult);
     }

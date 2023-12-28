@@ -1,6 +1,5 @@
 package adeo.leroymerlin.cdp.listing.infra.resource;
 
-import adeo.leroymerlin.cdp.listing.domain.model.Event;
 import adeo.leroymerlin.cdp.listing.domain.model.SearchCriteria;
 import adeo.leroymerlin.cdp.listing.domain.use_cases.list_events.ListEvents;
 import adeo.leroymerlin.cdp.listing.domain.use_cases.list_events.ListEventsUseCase;
@@ -15,7 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Set;
 
-import static adeo.leroymerlin.cdp.listing.fixtures.EventFixtures.EVENT_VIEILLES_CHARRUES;
+import static adeo.leroymerlin.cdp.listing.fixtures.EventFixtures.LISTED_EVENT_VIEILLES_CHARRUES;
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -35,7 +34,7 @@ class ListEventsResourceTest {
 
     @Test
     void find_all_events() throws Exception {
-        Set<Event> events = Set.of(EVENT_VIEILLES_CHARRUES);
+        Set<ListEventsUseCase.ListedEvent> events = Set.of(LISTED_EVENT_VIEILLES_CHARRUES);
 
         when(useCase.proceed(ListEvents.noCriteria())).thenReturn(new ListEventsUseCase.ListedEvents(events));
 
@@ -60,7 +59,7 @@ class ListEventsResourceTest {
 
     @Test
     void list_events_according_to_a_given_criteria() throws Exception {
-        Set<Event> events = Set.of(EVENT_VIEILLES_CHARRUES);
+        Set<ListEventsUseCase.ListedEvent> events = Set.of(LISTED_EVENT_VIEILLES_CHARRUES);
 
         when(useCase.proceed(new ListEvents(SearchCriteria.of("cob")))).thenReturn(new ListEventsUseCase.ListedEvents(events));
 

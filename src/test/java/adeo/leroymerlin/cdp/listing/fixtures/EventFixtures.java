@@ -1,6 +1,7 @@
 package adeo.leroymerlin.cdp.listing.fixtures;
 
 import adeo.leroymerlin.cdp.listing.domain.model.*;
+import adeo.leroymerlin.cdp.listing.domain.use_cases.list_events.ListEventsUseCase;
 
 import java.util.Set;
 
@@ -40,4 +41,7 @@ public class EventFixtures {
             .comment("no comment")
             .bands(Set.of(BAND_DEEP_PURPLE))
             .build();
+
+    public static ListEventsUseCase.ListedEvent LISTED_EVENT_VIEILLES_CHARRUES = ListEventsUseCase.ListedEvent.fromDomain(EVENT_VIEILLES_CHARRUES);
+    public static ListEventsUseCase.ListedEvent LISTED_EVENT_DOWNLOAD_FESTIVAL = ListEventsUseCase.ListedEvent.fromDomain(EVENT_DOWNLOAD_FESTIVAL);
 }
