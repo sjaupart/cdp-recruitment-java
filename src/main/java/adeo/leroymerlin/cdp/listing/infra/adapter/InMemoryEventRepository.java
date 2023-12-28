@@ -22,6 +22,11 @@ public class InMemoryEventRepository implements EventRepository {
                 .collect(toSet());
     }
 
+    @Override
+    public void delete(EventId eventId) {
+        repository.deleteById(eventId.value());
+    }
+
     private Event toDomain(adeo.leroymerlin.cdp.listing.infra.adapter.hsql.Event persistedEvent) {
         Set<Band> bands = persistedEvent.getBands().stream()
                 .map(persistedBand -> new Band(
