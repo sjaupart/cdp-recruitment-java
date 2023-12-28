@@ -1,6 +1,7 @@
 package adeo.leroymerlin.cdp.listing.domain.model;
 
 import java.util.Objects;
+import java.util.Set;
 
 public class Event {
 
@@ -9,8 +10,9 @@ public class Event {
     private final String pictureUrl;
     private final Integer numberOfStars;
     private final String comment;
+    private final Set<Band> bands;
 
-    private Event(EventId id, String name, String pictureUrl, Integer numberOfStars, String comment) {
+    private Event(EventId id, String name, String pictureUrl, Integer numberOfStars, String comment, Set<Band> bands) {
         if (Objects.isNull(name)) {
             throw new InvalidEvent("Name is mandatory");
         }
@@ -20,6 +22,7 @@ public class Event {
         this.pictureUrl = pictureUrl;
         this.numberOfStars = numberOfStars;
         this.comment = comment;
+        this.bands = bands;
     }
 
     public static Builder builder() {
@@ -46,17 +49,21 @@ public class Event {
         return comment;
     }
 
+    public Set<Band> bands() {
+        return bands;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Event event = (Event) o;
-        return Objects.equals(id, event.id) && Objects.equals(name, event.name) && Objects.equals(pictureUrl, event.pictureUrl) && Objects.equals(numberOfStars, event.numberOfStars) && Objects.equals(comment, event.comment);
+        return Objects.equals(id, event.id) && Objects.equals(name, event.name) && Objects.equals(pictureUrl, event.pictureUrl) && Objects.equals(numberOfStars, event.numberOfStars) && Objects.equals(comment, event.comment) && Objects.equals(bands, event.bands);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, pictureUrl, numberOfStars, comment);
+        return Objects.hash(id, name, pictureUrl, numberOfStars, comment, bands);
     }
 
     @Override
@@ -67,6 +74,7 @@ public class Event {
                 ", pictureUrl='" + pictureUrl + '\'' +
                 ", numberOfStars=" + numberOfStars +
                 ", comment='" + comment + '\'' +
+                ", bands=" + bands +
                 '}';
     }
 
@@ -76,6 +84,7 @@ public class Event {
         private String picture;
         private Integer numberOfStars;
         private String comment;
+        private Set<Band> bands;
 
         public Builder id(EventId id) {
             this.id = id;
@@ -102,8 +111,13 @@ public class Event {
             return this;
         }
 
+        public Builder bands(Set<Band> bands) {
+            this.bands = bands;
+            return this;
+        }
+
         public Event build() {
-            return new Event(this.id, this.name, this.picture, this.numberOfStars, this.comment);
+            return new Event(this.id, this.name, this.picture, this.numberOfStars, this.comment, this.bands);
         }
     }
 }

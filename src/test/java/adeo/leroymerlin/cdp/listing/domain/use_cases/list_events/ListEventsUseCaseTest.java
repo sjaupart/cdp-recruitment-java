@@ -1,7 +1,6 @@
 package adeo.leroymerlin.cdp.listing.domain.use_cases.list_events;
 
-import adeo.leroymerlin.cdp.listing.domain.model.Event;
-import adeo.leroymerlin.cdp.listing.domain.model.EventId;
+import adeo.leroymerlin.cdp.listing.domain.model.*;
 import adeo.leroymerlin.cdp.listing.domain.port.out.EventRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,6 +42,18 @@ class ListEventsUseCaseTest {
                 .pictureUrl("vieilles_charrues.png")
                 .numberOfStars(5)
                 .comment("good event")
+                .bands(Set.of(
+                        new Band(
+                                new BandId(1006L),
+                                "AC/DC",
+                                Set.of(
+                                        new Member(new MemberId(1020L), "Queen Abigail Cardenas"),
+                                        new Member(new MemberId(1021L), "Queen Kimberly Jacobs"),
+                                        new Member(new MemberId(1022L), "Queen Crystal Lynn"),
+                                        new Member(new MemberId(1023L), "Queen Felix Nichols")
+                                )
+                        )
+                ))
                 .build();
 
         assertThat(listedEvents.events()).containsExactly(expectedResult);

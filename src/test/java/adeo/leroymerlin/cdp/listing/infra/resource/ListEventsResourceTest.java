@@ -15,8 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.Set;
 
 import static adeo.leroymerlin.cdp.listing.fixtures.EventFixtures.EVENT_VIEILLES_CHARRUES;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -47,9 +46,14 @@ class ListEventsResourceTest {
                 .andExpect(jsonPath("$[0].comment", is("good event")))
                 .andExpect(jsonPath("$[0].imgUrl", is("vieilles_charrues.png")))
                 .andExpect(jsonPath("$[0].nbStars", is(5)))
-        ;//.andExpect(jsonPath("$[0].bands", hasSize(1)))
-        //.andExpect(jsonPath("$[0].bands[0].name", is("Megadeth")))
-        //.andExpect(jsonPath("$[0].bands[0].members", hasSize(1)))
-        //.andExpect(jsonPath("$[0].bands[0].members[0].name", is("Queen Gertrude Hudson")));
+                .andExpect(jsonPath("$[0].bands", hasSize(1)))
+                .andExpect(jsonPath("$[0].bands[0].name", is("AC/DC")))
+                .andExpect(jsonPath("$[0].bands[0].members", hasSize(4)))
+                .andExpect(jsonPath("$[0].bands[0].members[*].name", containsInAnyOrder(
+                        "Queen Abigail Cardenas",
+                        "Queen Kimberly Jacobs",
+                        "Queen Crystal Lynn",
+                        "Queen Felix Nichols"
+                )));
     }
 }
