@@ -26,20 +26,17 @@ public class Event {
         return new Builder();
     }
 
-    public String name() {
-        return name;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Event event = (Event) o;
+        return Objects.equals(id, event.id) && Objects.equals(name, event.name) && Objects.equals(pictureUrl, event.pictureUrl) && Objects.equals(numberOfStars, event.numberOfStars) && Objects.equals(comment, event.comment);
     }
 
-    public String pictureUrl() {
-        return pictureUrl;
-    }
-
-    public Integer numberOfStars() {
-        return numberOfStars;
-    }
-
-    public String comment() {
-        return comment;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, pictureUrl, numberOfStars, comment);
     }
 
     public static class Builder {

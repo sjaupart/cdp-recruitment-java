@@ -36,12 +36,13 @@ class ListEventsUseCaseTest {
 
         ListEventsUseCase.ListedEvents listedEvents = useCase.proceed(new ListEvents());
 
-        assertThat(listedEvents.get()).hasSize(1);
+        Event expectedResult = Event.builder()
+                .name("Les Vieilles Charrues")
+                .pictureUrl("vieilles_charrues.png")
+                .numberOfStars(5)
+                .comment("good event")
+                .build();
 
-        Event theEvent = listedEvents.get().stream().findFirst().get();
-        assertThat(theEvent.name()).isEqualTo("Les Vieilles Charrues");
-        assertThat(theEvent.pictureUrl()).isEqualTo("vieilles_charrues.png");
-        assertThat(theEvent.numberOfStars()).isEqualTo(5);
-        assertThat(theEvent.comment()).isEqualTo("good event");
+        assertThat(listedEvents.events()).containsExactly(expectedResult);
     }
 }

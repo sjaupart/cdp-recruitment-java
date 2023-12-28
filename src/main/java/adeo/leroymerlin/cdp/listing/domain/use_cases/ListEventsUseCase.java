@@ -28,7 +28,7 @@ public class ListEventsUseCase implements QueryHandler<ListEvents, ListEventsUse
             this.events = events;
         }
 
-        public Set<Event> get() {
+        public Set<Event> events() {
             return events;
         }
     }
