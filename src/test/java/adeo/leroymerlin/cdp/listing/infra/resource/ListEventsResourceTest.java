@@ -1,6 +1,7 @@
 package adeo.leroymerlin.cdp.listing.infra.resource;
 
 import adeo.leroymerlin.cdp.listing.domain.model.Event;
+import adeo.leroymerlin.cdp.listing.domain.model.SearchCriteria;
 import adeo.leroymerlin.cdp.listing.domain.use_cases.list_events.ListEvents;
 import adeo.leroymerlin.cdp.listing.domain.use_cases.list_events.ListEventsUseCase;
 import adeo.leroymerlin.cdp.listing.infra.config.ListingTestConfiguration;
@@ -55,5 +56,39 @@ class ListEventsResourceTest {
                         "Queen Crystal Lynn",
                         "Queen Felix Nichols"
                 )));
+    }
+
+    @Test
+    void list_events_according_to_a_given_criteria() throws Exception {
+        Set<Event> events = Set.of(EVENT_VIEILLES_CHARRUES);
+
+        when(useCase.proceed(new ListEvents(SearchCriteria.of("cob")))).thenReturn(new ListEventsUseCase.ListedEvents(events));
+
+        mockMvc.perform(get("/api/events/search/cob"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.*", hasSize(1)))
+                .andExpect(jsonPath("$[0].id", is(1)))
+                .andExpect(jsonPath("$[0].title", is("Les Vieilles Charrues")))
+                .andExpect(jsonPath("$[0].comment", is("good event")))
+                .andExpect(jsonPath("$[0].imgUrl", is("vieilles_charrues.png")))
+                .andExpect(jsonPath("$[0].nbStars", is(5)))
+                .andExpect(jsonPath("$[0].bands", hasSize(1)))
+                .andExpect(jsonPath("$[0].bands[0].name", is("AC/DC")))
+                .andExpect(jsonPath("$[0].bands[0].members", hasSize(4)))
+                .andExpect(jsonPath("$[0].bands[0].members[*].name", containsInAnyOrder(
+                        "Queen Abigail Cardenas",
+                        "Queen Kimberly Jacobs",
+                        "Queen Crystal Lynn",
+                        "Queen Felix Nichols"
+                )));
+    }
+
+    @Test
+    void no_event_according_to_the_given_criteria() throws Exception {
+        when(useCase.proceed(new ListEvents(SearchCriteria.of("azerty")))).thenReturn(new ListEventsUseCase.ListedEvents(Set.of()));
+
+        mockMvc.perform(get("/api/events/search/azerty"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.*", hasSize(0)));
     }
 }
