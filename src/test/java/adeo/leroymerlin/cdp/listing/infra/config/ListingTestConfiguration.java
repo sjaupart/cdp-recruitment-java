@@ -2,6 +2,8 @@ package adeo.leroymerlin.cdp.listing.infra.config;
 
 import adeo.leroymerlin.cdp.listing.MockRegistry;
 import adeo.leroymerlin.cdp.listing.domain.port.out.EventRepository;
+import adeo.leroymerlin.cdp.listing.domain.use_cases.delete_event.DeleteEventUseCase;
+import adeo.leroymerlin.cdp.listing.domain.use_cases.list_events.ListEventsUseCase;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
@@ -20,5 +22,17 @@ public class ListingTestConfiguration {
     @Primary
     public EventRepository eventsRepository(MockRegistry registry) {
         return registry.mock(EventRepository.class);
+    }
+
+    @Bean
+    @Primary
+    public ListEventsUseCase listEventsUseCase(EventRepository eventRepository) {
+        return new ListEventsUseCase(eventRepository);
+    }
+
+    @Bean
+    @Primary
+    public DeleteEventUseCase deleteEventUseCase(EventRepository eventRepository) {
+        return new DeleteEventUseCase(eventRepository);
     }
 }

@@ -1,6 +1,7 @@
 package adeo.leroymerlin.cdp.listing.infra.config;
 
 import adeo.leroymerlin.cdp.listing.domain.port.out.EventRepository;
+import adeo.leroymerlin.cdp.listing.domain.use_cases.delete_event.DeleteEventUseCase;
 import adeo.leroymerlin.cdp.listing.domain.use_cases.list_events.ListEventsUseCase;
 import adeo.leroymerlin.cdp.listing.infra.adapter.InMemoryEventRepository;
 import org.springframework.context.annotation.Bean;
@@ -19,5 +20,10 @@ public class ListingConfiguration {
     @Bean
     public ListEventsUseCase listEventsUseCase(EventRepository eventRepository) {
         return new ListEventsUseCase(eventRepository);
+    }
+
+    @Bean
+    public DeleteEventUseCase deleteEventUseCase(EventRepository eventRepository) {
+        return new DeleteEventUseCase(eventRepository);
     }
 }
