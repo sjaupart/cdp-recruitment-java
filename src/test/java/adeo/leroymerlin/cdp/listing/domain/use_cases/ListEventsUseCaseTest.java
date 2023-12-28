@@ -40,6 +40,8 @@ class ListEventsUseCaseTest {
 
         Event theEvent = listedEvents.get().stream().findFirst().get();
         assertThat(theEvent.name()).isEqualTo("Les Vieilles Charrues");
+        assertThat(theEvent.pictureUrl()).isEqualTo("vieilles_charrues.png");
+        assertThat(theEvent.numberOfStars()).isEqualTo(5);
         assertThat(theEvent.comment()).isEqualTo("good event");
     }
 }
