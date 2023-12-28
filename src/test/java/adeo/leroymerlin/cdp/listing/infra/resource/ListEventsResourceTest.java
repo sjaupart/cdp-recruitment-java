@@ -36,7 +36,7 @@ class ListEventsResourceTest {
     void find_all_events() throws Exception {
         Set<Event> events = Set.of(EVENT_VIEILLES_CHARRUES);
 
-        when(useCase.proceed(new ListEvents())).thenReturn(new ListEventsUseCase.ListedEvents(events));
+        when(useCase.proceed(ListEvents.noCriteria())).thenReturn(new ListEventsUseCase.ListedEvents(events));
 
         mockMvc.perform(get("/api/events/"))
                 .andExpect(status().isOk())

@@ -26,7 +26,7 @@ public class ListEventsResource {
 
     @GetMapping("/")
     public List<ListedEventDto> listEvents() {
-        ListEventsUseCase.ListedEvents listedEvents = useCase.proceed(new ListEvents());
+        ListEventsUseCase.ListedEvents listedEvents = useCase.proceed(ListEvents.noCriteria());
 
         return listedEvents.events().stream()
                 .map(ListedEventDto::from)

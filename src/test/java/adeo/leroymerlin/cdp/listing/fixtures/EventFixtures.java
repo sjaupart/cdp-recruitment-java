@@ -17,6 +17,12 @@ public class EventFixtures {
             )
     );
 
+    public static Band BAND_DEEP_PURPLE = new Band(
+            new BandId(1007L),
+            "Deep Purple",
+            Set.of(new Member(new MemberId(1024L), "Queen Victoria Cooper"))
+    );
+
     public static Event EVENT_VIEILLES_CHARRUES = Event.builder()
             .id(new EventId(1L))
             .name("Les Vieilles Charrues")
@@ -24,5 +30,14 @@ public class EventFixtures {
             .numberOfStars(5)
             .comment("good event")
             .bands(Set.of(BAND_ACDC))
+            .build();
+
+    public static Event EVENT_DOWNLOAD_FESTIVAL = Event.builder()
+            .id(new EventId(1003L))
+            .name("Download Festival")
+            .pictureUrl("download_festival.png")
+            .numberOfStars(4)
+            .comment("no comment")
+            .bands(Set.of(BAND_DEEP_PURPLE))
             .build();
 }

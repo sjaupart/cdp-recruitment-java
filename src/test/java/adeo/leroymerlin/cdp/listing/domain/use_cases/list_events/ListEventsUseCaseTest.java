@@ -11,6 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Set;
 
+import static adeo.leroymerlin.cdp.listing.fixtures.EventFixtures.EVENT_DOWNLOAD_FESTIVAL;
 import static adeo.leroymerlin.cdp.listing.fixtures.EventFixtures.EVENT_VIEILLES_CHARRUES;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -34,7 +35,7 @@ class ListEventsUseCaseTest {
         when(eventRepository.events())
                 .thenReturn(Set.of(EVENT_VIEILLES_CHARRUES));
 
-        ListEventsUseCase.ListedEvents listedEvents = useCase.proceed(new ListEvents());
+        ListEventsUseCase.ListedEvents listedEvents = useCase.proceed(ListEvents.noCriteria());
 
         Event expectedResult = Event.builder()
                 .id(new EventId(1L))
@@ -57,5 +58,23 @@ class ListEventsUseCaseTest {
                 .build();
 
         assertThat(listedEvents.events()).containsExactly(expectedResult);
+    }
+
+    @Test
+    void list_events_matching_criteria() {
+        when(eventRepository.events())
+                .thenReturn(Set.of(EVENT_VIEILLES_CHARRUES, EVENT_DOWNLOAD_FESTIVAL));
+
+        ListEventsUseCase.ListedEvents listedEvents = useCase.proceed(new ListEvents(SearchCriteria.of("o")));
+        assertThat(listedEvents.names()).containsExactlyInAnyOrder("Les Vieilles Charrues", "Download Festival");
+
+        ListEventsUseCase.ListedEvents listedEventsWithYn = useCase.proceed(new ListEvents(SearchCriteria.of("yn")));
+        assertThat(listedEventsWithYn.names()).containsExactlyInAnyOrder("Les Vieilles Charrues");
+
+        ListEventsUseCase.ListedEvents listedEventsWithCoo = useCase.proceed(new ListEvents(SearchCriteria.of("Coo")));
+        assertThat(listedEventsWithCoo.names()).containsExactlyInAnyOrder("Download Festival");
+
+        ListEventsUseCase.ListedEvents listedEventsWithLowercasedCoo = useCase.proceed(new ListEvents(SearchCriteria.of("coo")));
+        assertThat(listedEventsWithLowercasedCoo.names()).containsExactlyInAnyOrder();
     }
 }

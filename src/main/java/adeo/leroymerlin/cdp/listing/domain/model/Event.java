@@ -53,6 +53,10 @@ public class Event {
         return bands;
     }
 
+    public boolean hasMemberNameMatching(String pattern) {
+        return bands.stream().anyMatch(band -> band.hasMemberNameMatching(pattern));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
