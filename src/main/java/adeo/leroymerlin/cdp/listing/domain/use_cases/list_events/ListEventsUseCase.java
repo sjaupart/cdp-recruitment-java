@@ -1,7 +1,8 @@
-package adeo.leroymerlin.cdp.listing.domain.use_cases;
+package adeo.leroymerlin.cdp.listing.domain.use_cases.list_events;
 
 import adeo.leroymerlin.cdp.listing.domain.model.Event;
 import adeo.leroymerlin.cdp.listing.domain.port.out.EventRepository;
+import adeo.leroymerlin.cdp.listing.domain.use_cases.QueryHandler;
 
 import java.util.Set;
 

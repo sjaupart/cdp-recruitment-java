@@ -1,7 +1,9 @@
-package adeo.leroymerlin.cdp.listing.domain.use_cases;
+package adeo.leroymerlin.cdp.listing.domain.use_cases.list_events;
 
 import adeo.leroymerlin.cdp.listing.domain.model.Event;
 import adeo.leroymerlin.cdp.listing.domain.port.out.EventRepository;
+import adeo.leroymerlin.cdp.listing.domain.use_cases.list_events.ListEvents;
+import adeo.leroymerlin.cdp.listing.domain.use_cases.list_events.ListEventsUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
