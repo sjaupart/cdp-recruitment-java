@@ -67,11 +67,15 @@ public class ListEventsUseCase implements QueryHandler<ListEvents, ListEventsUse
 
         public ListedEvent(EventId id, String name, String pictureUrl, Integer numberOfStars, String comment, Set<ListedBand> bands) {
             this.id = id;
-            this.name = name;
+            this.name = formattedName(name, bands);
             this.pictureUrl = pictureUrl;
             this.numberOfStars = numberOfStars;
             this.comment = comment;
             this.bands = bands;
+        }
+
+        private String formattedName(String name, Set<ListedBand> children) {
+            return "%s [%s]".formatted(name, children.size());
         }
 
         public static ListedEvent fromDomain(Event event) {
@@ -121,6 +125,18 @@ public class ListEventsUseCase implements QueryHandler<ListEvents, ListEventsUse
         public int hashCode() {
             return Objects.hash(id, name, pictureUrl, numberOfStars, comment, bands);
         }
+
+        @Override
+        public String toString() {
+            return "ListedEvent{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", pictureUrl='" + pictureUrl + '\'' +
+                    ", numberOfStars=" + numberOfStars +
+                    ", comment='" + comment + '\'' +
+                    ", bands=" + bands +
+                    '}';
+        }
     }
 
     public static class ListedBand {
@@ -130,7 +146,7 @@ public class ListEventsUseCase implements QueryHandler<ListEvents, ListEventsUse
 
         public ListedBand(BandId id, String name, Set<Member> members) {
             this.id = id;
-            this.name = name;
+            this.name = toFormattedName(name, members);
             this.members = members;
         }
 
@@ -140,6 +156,10 @@ public class ListEventsUseCase implements QueryHandler<ListEvents, ListEventsUse
                     band.name(),
                     band.members()
             );
+        }
+
+        private String toFormattedName(String name, Set<Member> children) {
+            return "%s [%s]".formatted(name, children.size());
         }
 
         public BandId id() {
@@ -165,6 +185,15 @@ public class ListEventsUseCase implements QueryHandler<ListEvents, ListEventsUse
         @Override
         public int hashCode() {
             return Objects.hash(id, name, members);
+        }
+
+        @Override
+        public String toString() {
+            return "ListedBand{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", members=" + members +
+                    '}';
         }
     }
 }

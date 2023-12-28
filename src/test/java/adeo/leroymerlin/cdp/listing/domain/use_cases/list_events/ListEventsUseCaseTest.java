@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static adeo.leroymerlin.cdp.listing.fixtures.EventFixtures.EVENT_DOWNLOAD_FESTIVAL;
@@ -61,14 +62,21 @@ class ListEventsUseCaseTest {
                 )
         );
 
-        assertThat(listedEvents.events()).containsExactly(expectedResult);
+        Set<ListEventsUseCase.ListedEvent> events = listedEvents.events();
+        Set<ListEventsUseCase.ListedBand> bands = events.stream().flatMap(e -> e.bands().stream()).collect(Collectors.toSet());
+
+        assertThat(events).containsExactly(expectedResult);
+        assertThat(events).extracting("name")
+                .containsExactlyInAnyOrder("Les Vieilles Charrues [1]");
+        assertThat(bands).extracting("name")
+                .containsExactlyInAnyOrder("AC/DC [4]");
     }
 
     private static Stream<Arguments> eventsMatchingPattern() {
         return Stream.of(
-                Arguments.of("o", Set.of("Les Vieilles Charrues", "Download Festival")),
-                Arguments.of("yn", Set.of("Les Vieilles Charrues")),
-                Arguments.of("Coo", Set.of("Download Festival")),
+                Arguments.of("o", Set.of("Les Vieilles Charrues [1]", "Download Festival [1]")),
+                Arguments.of("yn", Set.of("Les Vieilles Charrues [1]")),
+                Arguments.of("Coo", Set.of("Download Festival [1]")),
                 Arguments.of("coo", Set.of())
         );
     }

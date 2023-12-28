@@ -42,6 +42,23 @@ public class EventFixtures {
             .bands(Set.of(BAND_DEEP_PURPLE))
             .build();
 
-    public static ListEventsUseCase.ListedEvent LISTED_EVENT_VIEILLES_CHARRUES = ListEventsUseCase.ListedEvent.fromDomain(EVENT_VIEILLES_CHARRUES);
-    public static ListEventsUseCase.ListedEvent LISTED_EVENT_DOWNLOAD_FESTIVAL = ListEventsUseCase.ListedEvent.fromDomain(EVENT_DOWNLOAD_FESTIVAL);
+    public static ListEventsUseCase.ListedBand LISTED_BAND_ACDC = new ListEventsUseCase.ListedBand(
+            new BandId(1006L),
+            "AC/DC",
+            Set.of(
+                    new Member(new MemberId(1020L), "Queen Abigail Cardenas"),
+                    new Member(new MemberId(1021L), "Queen Kimberly Jacobs"),
+                    new Member(new MemberId(1022L), "Queen Crystal Lynn"),
+                    new Member(new MemberId(1023L), "Queen Felix Nichols")
+            )
+    );
+
+    public static ListEventsUseCase.ListedEvent LISTED_EVENT_VIEILLES_CHARRUES = new ListEventsUseCase.ListedEvent(
+            new EventId(1L),
+            "Les Vieilles Charrues",
+            "vieilles_charrues.png",
+            5,
+            "good event",
+            Set.of(LISTED_BAND_ACDC)
+    );
 }

@@ -42,12 +42,12 @@ class ListEventsResourceTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.*", hasSize(1)))
                 .andExpect(jsonPath("$[0].id", is(1)))
-                .andExpect(jsonPath("$[0].title", is("Les Vieilles Charrues")))
+                .andExpect(jsonPath("$[0].title", is("Les Vieilles Charrues [1]")))
                 .andExpect(jsonPath("$[0].comment", is("good event")))
                 .andExpect(jsonPath("$[0].imgUrl", is("vieilles_charrues.png")))
                 .andExpect(jsonPath("$[0].nbStars", is(5)))
                 .andExpect(jsonPath("$[0].bands", hasSize(1)))
-                .andExpect(jsonPath("$[0].bands[0].name", is("AC/DC")))
+                .andExpect(jsonPath("$[0].bands[0].name", is("AC/DC [4]")))
                 .andExpect(jsonPath("$[0].bands[0].members", hasSize(4)))
                 .andExpect(jsonPath("$[0].bands[0].members[*].name", containsInAnyOrder(
                         "Queen Abigail Cardenas",
@@ -67,12 +67,12 @@ class ListEventsResourceTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.*", hasSize(1)))
                 .andExpect(jsonPath("$[0].id", is(1)))
-                .andExpect(jsonPath("$[0].title", is("Les Vieilles Charrues")))
+                .andExpect(jsonPath("$[0].title", is("Les Vieilles Charrues [1]")))
                 .andExpect(jsonPath("$[0].comment", is("good event")))
                 .andExpect(jsonPath("$[0].imgUrl", is("vieilles_charrues.png")))
                 .andExpect(jsonPath("$[0].nbStars", is(5)))
                 .andExpect(jsonPath("$[0].bands", hasSize(1)))
-                .andExpect(jsonPath("$[0].bands[0].name", is("AC/DC")))
+                .andExpect(jsonPath("$[0].bands[0].name", is("AC/DC [4]")))
                 .andExpect(jsonPath("$[0].bands[0].members", hasSize(4)))
                 .andExpect(jsonPath("$[0].bands[0].members[*].name", containsInAnyOrder(
                         "Queen Abigail Cardenas",
