@@ -23,7 +23,7 @@ public class ListEventsResource {
         this.useCase = useCase;
     }
 
-    @GetMapping
+    @GetMapping("/")
     public List<ListedEventDto> listEvents() {
         ListEventsUseCase.ListedEvents listedEvents = useCase.proceed(new ListEvents());
 

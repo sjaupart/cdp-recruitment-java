@@ -16,11 +16,6 @@ public class EventController {
         this.eventService = eventService;
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public List<Event> findEvents() {
-        return eventService.getEvents();
-    }
-
     @RequestMapping(value = "/search/{query}", method = RequestMethod.GET)
     public List<Event> findEvents(@PathVariable String query) {
         return eventService.getFilteredEvents(query);

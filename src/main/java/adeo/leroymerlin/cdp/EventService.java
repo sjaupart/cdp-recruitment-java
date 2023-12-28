@@ -15,10 +15,6 @@ public class EventService {
         this.eventRepository = eventRepository;
     }
 
-    public List<Event> getEvents() {
-        return eventRepository.findAllBy();
-    }
-
     public void delete(Long id) {
         eventRepository.deleteById(id);
     }

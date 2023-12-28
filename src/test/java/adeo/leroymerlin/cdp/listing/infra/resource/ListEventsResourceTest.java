@@ -38,7 +38,7 @@ class ListEventsResourceTest {
 
         when(useCase.proceed(new ListEvents())).thenReturn(new ListEventsUseCase.ListedEvents(events));
 
-        mockMvc.perform(get("/api/events"))
+        mockMvc.perform(get("/api/events/"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.*", hasSize(1)))
                 .andExpect(jsonPath("$[0].id", is(1)))
