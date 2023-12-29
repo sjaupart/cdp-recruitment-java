@@ -1,7 +1,6 @@
 package adeo.leroymerlin.cdp.events.domain.use_cases.list_events;
 
 import adeo.leroymerlin.cdp.events.domain.model.BandId;
-import adeo.leroymerlin.cdp.events.domain.model.EventId;
 import adeo.leroymerlin.cdp.events.domain.model.Member;
 import adeo.leroymerlin.cdp.events.domain.model.SearchCriteria;
 import adeo.leroymerlin.cdp.events.domain.port.out.EventRepository;
@@ -19,8 +18,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static adeo.leroymerlin.cdp.events.fixtures.EventFixtures.EVENT_DOWNLOAD_FESTIVAL;
-import static adeo.leroymerlin.cdp.events.fixtures.EventFixtures.EVENT_VIEILLES_CHARRUES;
+import static adeo.leroymerlin.cdp.events.fixtures.EventFixtures.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
@@ -46,7 +44,7 @@ class ListEventsUseCaseTest {
         ListEventsUseCase.ListedEvents listedEvents = useCase.proceed(ListEvents.noCriteria());
 
         ListEventsUseCase.ListedEvent expectedResult = new ListEventsUseCase.ListedEvent(
-                new EventId(1L),
+                EVENT_ID_VIEILLES_CHARRUES,
                 "Les Vieilles Charrues",
                 "vieilles_charrues.png",
                 5,

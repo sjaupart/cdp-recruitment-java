@@ -1,6 +1,5 @@
 package adeo.leroymerlin.cdp.events.domain.use_cases.delete_event;
 
-import adeo.leroymerlin.cdp.events.domain.model.EventId;
 import adeo.leroymerlin.cdp.events.domain.port.out.EventRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,6 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static adeo.leroymerlin.cdp.events.fixtures.EventFixtures.EVENT_ID_VIEILLES_CHARRUES;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -27,9 +27,7 @@ class DeleteEventUseCaseTest {
 
     @Test
     void delete_an_event() {
-        EventId id = new EventId(1000L);
-
-        useCase.proceed(new DeleteEvent(id));
-        verify(eventRepository).delete(id);
+        useCase.proceed(new DeleteEvent(EVENT_ID_VIEILLES_CHARRUES));
+        verify(eventRepository).delete(EVENT_ID_VIEILLES_CHARRUES);
     }
 }

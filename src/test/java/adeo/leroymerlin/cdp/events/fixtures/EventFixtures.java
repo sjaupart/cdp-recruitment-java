@@ -24,8 +24,11 @@ public class EventFixtures {
             Set.of(Member.of(1024L, "Queen Victoria Cooper"))
     );
 
+    public static final EventId EVENT_ID_VIEILLES_CHARRUES = new EventId(1L);
+    public static final EventId EVENT_ID_DOWNLOAD_FESTIVAL = new EventId(1003L);
+
     public static Event EVENT_VIEILLES_CHARRUES = Event.builder()
-            .id(new EventId(1L))
+            .id(EVENT_ID_VIEILLES_CHARRUES)
             .name("Les Vieilles Charrues")
             .pictureUrl("vieilles_charrues.png")
             .numberOfStars(5)
@@ -34,7 +37,7 @@ public class EventFixtures {
             .build();
 
     public static Event EVENT_DOWNLOAD_FESTIVAL = Event.builder()
-            .id(new EventId(1003L))
+            .id(EVENT_ID_DOWNLOAD_FESTIVAL)
             .name("Download Festival")
             .pictureUrl("download_festival.png")
             .numberOfStars(4)
@@ -54,7 +57,7 @@ public class EventFixtures {
     );
 
     public static ListEventsUseCase.ListedEvent LISTED_EVENT_VIEILLES_CHARRUES = new ListEventsUseCase.ListedEvent(
-            new EventId(1L),
+            EVENT_ID_VIEILLES_CHARRUES,
             "Les Vieilles Charrues",
             "vieilles_charrues.png",
             5,
