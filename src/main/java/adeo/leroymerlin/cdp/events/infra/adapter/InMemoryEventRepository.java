@@ -33,8 +33,8 @@ public class InMemoryEventRepository implements EventRepository {
                         new BandId(persistedEvent.getId()),
                         persistedBand.getName(),
                         persistedBand.getMembers().stream()
-                                .map(persistedMember -> new Member(
-                                        new MemberId(persistedMember.getId()),
+                                .map(persistedMember -> Member.of(
+                                        persistedMember.getId(),
                                         persistedMember.getName()
                                 ))
                                 .collect(toSet())

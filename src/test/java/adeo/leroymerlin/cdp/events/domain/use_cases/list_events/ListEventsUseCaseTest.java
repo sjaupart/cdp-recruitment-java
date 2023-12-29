@@ -1,6 +1,9 @@
 package adeo.leroymerlin.cdp.events.domain.use_cases.list_events;
 
-import adeo.leroymerlin.cdp.events.domain.model.*;
+import adeo.leroymerlin.cdp.events.domain.model.BandId;
+import adeo.leroymerlin.cdp.events.domain.model.EventId;
+import adeo.leroymerlin.cdp.events.domain.model.Member;
+import adeo.leroymerlin.cdp.events.domain.model.SearchCriteria;
 import adeo.leroymerlin.cdp.events.domain.port.out.EventRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -53,10 +56,10 @@ class ListEventsUseCaseTest {
                                 new BandId(1006L),
                                 "AC/DC",
                                 Set.of(
-                                        new Member(new MemberId(1020L), "Queen Abigail Cardenas"),
-                                        new Member(new MemberId(1021L), "Queen Kimberly Jacobs"),
-                                        new Member(new MemberId(1022L), "Queen Crystal Lynn"),
-                                        new Member(new MemberId(1023L), "Queen Felix Nichols")
+                                        Member.of(1020L, "Queen Abigail Cardenas"),
+                                        Member.of(1021L, "Queen Kimberly Jacobs"),
+                                        Member.of(1022L, "Queen Crystal Lynn"),
+                                        Member.of(1023L, "Queen Felix Nichols")
                                 )
                         )
                 )

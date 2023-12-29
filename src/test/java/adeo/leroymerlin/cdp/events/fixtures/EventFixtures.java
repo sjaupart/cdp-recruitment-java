@@ -11,17 +11,17 @@ public class EventFixtures {
             new BandId(1006L),
             "AC/DC",
             Set.of(
-                    new Member(new MemberId(1020L), "Queen Abigail Cardenas"),
-                    new Member(new MemberId(1021L), "Queen Kimberly Jacobs"),
-                    new Member(new MemberId(1022L), "Queen Crystal Lynn"),
-                    new Member(new MemberId(1023L), "Queen Felix Nichols")
+                    Member.of(1020L, "Queen Abigail Cardenas"),
+                    Member.of(1021L, "Queen Kimberly Jacobs"),
+                    Member.of(1022L, "Queen Crystal Lynn"),
+                    Member.of(1023L, "Queen Felix Nichols")
             )
     );
 
     public static Band BAND_DEEP_PURPLE = new Band(
             new BandId(1007L),
             "Deep Purple",
-            Set.of(new Member(new MemberId(1024L), "Queen Victoria Cooper"))
+            Set.of(Member.of(1024L, "Queen Victoria Cooper"))
     );
 
     public static Event EVENT_VIEILLES_CHARRUES = Event.builder()
@@ -46,10 +46,10 @@ public class EventFixtures {
             new BandId(1006L),
             "AC/DC",
             Set.of(
-                    new Member(new MemberId(1020L), "Queen Abigail Cardenas"),
-                    new Member(new MemberId(1021L), "Queen Kimberly Jacobs"),
-                    new Member(new MemberId(1022L), "Queen Crystal Lynn"),
-                    new Member(new MemberId(1023L), "Queen Felix Nichols")
+                    Member.of(1020L, "Queen Abigail Cardenas"),
+                    Member.of(1021L, "Queen Kimberly Jacobs"),
+                    Member.of(1022L, "Queen Crystal Lynn"),
+                    Member.of(1023L, "Queen Felix Nichols")
             )
     );
 
