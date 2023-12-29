@@ -19,20 +19,21 @@ public class ListEventsUseCase implements QueryHandler<ListEvents, ListEventsUse
 
     @Override
     public ListedEvents proceed(ListEvents query) {
+        Set<Event> events = query.criteria()
+                .map(this::eventsWithMembersMatching)
+                .orElse(eventRepository.events());
+
+        return toListedEvents(events);
+    }
+
+    private ListedEvents toListedEvents(Set<Event> events) {
+        Set<ListedEvent> listedEvents = events.stream().map(ListedEvent::fromDomain).collect(toSet());
+        return new ListedEvents(listedEvents);
+    }
+
+    private Set<Event> eventsWithMembersMatching(SearchCriteria criteria) {
         Set<Event> events = eventRepository.events();
 
-        return query.criteria()
-                .map(c -> eventsWithMembersMatching(c, events))
-                .map(this::toListedEvents)
-                .map(ListedEvents::new)
-                .orElse(new ListedEvents(toListedEvents(events)));
-    }
-
-    private Set<ListedEvent> toListedEvents(Set<Event> events) {
-        return events.stream().map(ListedEvent::fromDomain).collect(toSet());
-    }
-
-    private Set<Event> eventsWithMembersMatching(SearchCriteria criteria, Set<Event> events) {
         return events.stream()
                 .filter(event -> event.hasMemberNameMatching(criteria.pattern()))
                 .collect(toSet());
